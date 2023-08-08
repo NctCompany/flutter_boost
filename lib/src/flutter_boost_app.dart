@@ -108,10 +108,13 @@ class FlutterBoostAppState extends State<FlutterBoostApp> {
         return true;
       }());
 
-      refreshOnPush(initialContainer);
-      _boostFlutterRouterApi.isEnvReady = true;
-      _addAppLifecycleStateEventListener();
-      BoostOperationQueue.instance.runPendingOperations();
+      /// 这里是为了解决加载白屏问题，延迟数字应该500以上都可以
+      Future.delayed(const Duration(milliseconds: 500), () {
+        refreshOnPush(initialContainer);
+        _boostFlutterRouterApi.isEnvReady = true;
+        _addAppLifecycleStateEventListener();
+        BoostOperationQueue.instance.runPendingOperations();
+      });
     });
   }
 
