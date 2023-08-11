@@ -98,6 +98,10 @@ public class FlutterBoostFragment extends FlutterFragment implements FlutterView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (isDebugLoggingEnabled()) Log.d(TAG, "#onCreateView: " + this);
+        final FlutterContainerManager containerManager = FlutterContainerManager.instance();
+        // try to detach prevous container from the engine.
+        FlutterViewContainer top = containerManager.getTopContainer();
+        if (top != null && top != this) top.detachFromEngineIfNeeded();
         FlutterBoost.instance().getPlugin().onContainerCreated(this);
         View view = super.onCreateView(inflater, container, savedInstanceState);
         flutterView = FlutterBoostUtils.findFlutterView(view);
