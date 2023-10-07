@@ -287,6 +287,7 @@ _Pragma("clang diagnostic pop")
   [self attatchFlutterEngine];
 
   [super bridge_viewWillAppear:animated];
+  [super viewWillAppear:animated];
   [self.view setNeedsLayout];//TODO:通过param来设定
 }
 
